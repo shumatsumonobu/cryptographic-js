@@ -1,24 +1,11 @@
 import Cipher from '~/Cipher';
 
+/**
+ * AES-256-CBC cipher.
+ * 256-bit key, 16-byte IV, Cipher Block Chaining mode.
+ */
 export default class extends Cipher {
-  /**
-   * Returns the encryption algorithm name.
-   * 
-   * @type {string}
-   */
   public readonly algorithm: string = 'aes-256-cbc';
-
-  /**
-   * Returns the byte size of the encryption / decryption key.
-   * 
-   * @type {number}
-   */
   public readonly keySize: number = 32;
-
-  /**
-   * Returns the byte size of the initialization vector.
-   * 
-   * @type {number}
-   */
   public readonly ivSize: number = 16;
 }

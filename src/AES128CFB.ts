@@ -1,24 +1,11 @@
 import Cipher from '~/Cipher';
 
+/**
+ * AES-128-CFB cipher.
+ * 128-bit key, 16-byte IV, Cipher Feedback mode.
+ */
 export default class extends Cipher {
-  /**
-   * Returns the encryption algorithm name.
-   * 
-   * @type {string}
-   */
   public readonly algorithm: string = 'aes-128-cfb';
-
-  /**
-   * Returns the byte size of the encryption / decryption key.
-   * 
-   * @type {number}
-   */
   public readonly keySize: number = 16;
-
-  /**
-   * Returns the byte size of the initialization vector.
-   * 
-   * @type {number}
-   */
   public readonly ivSize: number = 16;
 }
