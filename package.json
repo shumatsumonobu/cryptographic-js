@@ -1,7 +1,7 @@
 {
   "name": "cryptographic-js",
-  "version": "1.0.0",
-  "description": "This is an encryption/decryption module such as AES.",
+  "version": "1.0.3",
+  "description": "Lightweight AES encryption and decryption for Node.js",
   "_moduleAliases": {
     "~": "."
   },
@@ -10,16 +10,15 @@
   "types": "types/index.d.ts",
   "scripts": {
     "watch": "rollup -c --watch",
-    "prewatch": "rm -rf dist types && json2module package.json > src/package.ts",
+    "prewatch": "rm -rf dist types",
     "build": "rollup -c",
-    "prebuild": "rm -rf dist types && json2module package.json > src/package.ts",
+    "prebuild": "rm -rf dist types",
     "test": "jest",
-    "start": "ts-node -r tsconfig-paths/register -P tsconfig.json -O '{\"module\":\"commonjs\"}' -e \"import * as index from '~/index';console.log(index);\"",
-    "prestart": "json2module package.json > src/package.ts"
+    "start": "ts-node -r tsconfig-paths/register -P tsconfig.json -O '{\"module\":\"commonjs\"}' -e \"import * as index from '~/index';console.log(index);\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/takuya-motoshima/cryptographic-js.git"
+    "url": "git+https://github.com/shumatsumonobu/cryptographic-js.git"
   },
   "files": [
     "dist/*.js",
@@ -27,29 +26,24 @@
     "package.json"
   ],
   "keywords": [
-    "node",
-    "nodejs",
-    "javascript",
-    "js",
-    "shared",
-    "library",
-    "lib",
-    "module",
-    "typescript",
-    "ts",
-    "esm",
-    "es6",
+    "aes",
     "crypto",
-    "cypher",
-    "aes"
+    "cipher",
+    "encryption",
+    "decryption",
+    "cbc",
+    "ctr",
+    "cfb",
+    "node",
+    "typescript"
   ],
-  "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)",
+  "author": "shumatsumonobu <shumatsumonobu@gmail.com> (https://x.com/shumatsumonobu)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/takuya-motoshima/cryptographic-js/issues",
-    "email": "developer.takuyamotoshima@gmail.com"
+    "url": "https://github.com/shumatsumonobu/cryptographic-js/issues",
+    "email": "shumatsumonobu@gmail.com"
   },
-  "homepage": "https://github.com/takuya-motoshima/cryptographic-js#readme",
+  "homepage": "https://github.com/shumatsumonobu/cryptographic-js#readme",
   "dependencies": {
     "crypto-random-string": "^3.3.0",
     "module-alias": "^2.2.2",
@@ -61,7 +55,6 @@
     "@types/node": "^14.14.10",
     "builtin-modules": "^3.1.0",
     "jest": "^26.1.0",
-    "json2module": "0.0.3",
     "rollup": "^2.21.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",

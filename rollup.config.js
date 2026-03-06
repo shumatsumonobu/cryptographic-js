@@ -7,36 +7,50 @@ import builtins from 'builtin-modules'
 import pkg from './package.json';
 
 export default {
+  // Exclude Node.js built-in modules (fs, path, crypto, etc.) from the bundle.
   external: builtins,
-  // external: Object.keys(pkg['dependencies'] || []),
+
+  // Entry point.
   input: './src/index.ts',
+
   plugins: [
+    // Compile TypeScript and generate declaration files.
     typescript({
       tsconfigDefaults: { compilerOptions: {} },
       tsconfig: "tsconfig.json",
       tsconfigOverride: { compilerOptions: {} },
       useTsconfigDeclarationDir: true
     }),
+
+    // Minify the output.
     terser(),
+
+    // Allow importing JSON files.
     json(),
+
+    // Convert CommonJS modules to ES modules.
     commonjs(),
+
+    // Resolve node_modules dependencies.
     resolve({
       mainFields: ['module', 'main'],
-      // preferBuiltins: false
     })
   ],
+
   output: [
-    // ES module (for bundlers) build.
+    // ESM build (for bundlers).
     {
       format: 'esm',
       file: pkg.module
     },
-    // CommonJS (for Node) build.
+    // CommonJS build (for Node.js).
     {
       format: 'cjs',
       file: pkg.main
     }
   ],
+
+  // Watch mode settings.
   watch: {
     exclude: 'node_modules/**',
     include: 'src/**'

@@ -1,118 +1,108 @@
 # cryptographic-js
 
-This is an encryption/decryption module such as AES. The supported algorithms are as follows.  
+[![npm](https://img.shields.io/npm/v/cryptographic-js)](https://www.npmjs.com/package/cryptographic-js)
+[![license](https://img.shields.io/npm/l/cryptographic-js)](LICENSE)
 
-- AES-256-CTR
-- AES-192-CTR
-- AES-128-CTR
-- AES-256-CBC
-- AES-192-CBC
-- AES-128-CBC
-- AES-256-CFB
-- AES-192-CFB
-- AES-128-CFB
+Lightweight AES encryption and decryption for Node.js.
+Supports multiple key lengths and cipher modes with a simple, unified API.
+
+## Supported Algorithms
+
+| Mode | 128-bit | 192-bit | 256-bit |
+|:-----|:-------:|:-------:|:-------:|
+| CTR  | AES-128-CTR | AES-192-CTR | AES-256-CTR |
+| CBC  | AES-128-CBC | AES-192-CBC | AES-256-CBC |
+| CFB  | AES-128-CFB | AES-192-CFB | AES-256-CFB |
 
 ## Installation
 
-Install.
-
 ```sh
-npm install cryptographic-js;
+npm install cryptographic-js
 ```
 
-## API
-See [API.md](./API.md) for API reference.
-
-## Changelog
-
-See [CHANGELOG.md](./CHANGELOG.md).
-
-## Examples
-
-Examples can be found in examples/.
-
-```sh
-$ node examples/aes128cbc.js;
-AES128CBC encryption/decryption result: Hello World -> pS6x15zVXCV+jrHD5mi9wA== -> Hello World
-Decryption result in PHP: Hello World
-
-$ node examples/aes128cfb.js;
-AES128CFB encryption/decryption result: Hello World -> WPyaGRIrKsO0eVs= -> Hello World
-Decryption result in PHP: Hello World
-
-$ node examples/aes128ctr.js;
-AES128CTR encryption/decryption result: Hello World -> 2vnVo1vaoJiRGtg= -> Hello World
-Decryption result in PHP: Hello World
-
-$ node examples/aes192cbc.js;
-AES192CBC encryption/decryption result: Hello World -> Ec2sl0BJljNS0RyaZXNVQw== -> Hello World
-Decryption result in PHP: Hello World
-
-$ node examples/aes192cfb.js;
-AES192CFB encryption/decryption result: Hello World -> 1qG9zOP1INKnLck= -> Hello World
-Decryption result in PHP: Hello World
-
-$ node examples/aes192ctr.js;
-AES192CTR encryption/decryption result: Hello World -> UFe22J8bEBf7VIs= -> Hello World
-Decryption result in PHP: Hello World
-
-$ node examples/aes256cbc.js;
-AES256CBC encryption/decryption result: Hello World -> WWPBNfwZS8VMNPFABFXh9A== -> Hello World
-Decryption result in PHP: Hello World
-
-$ node examples/aes256cfb.js;
-AES256CFB encryption/decryption result: Hello World -> V8nc4jzE8IZA/Vs= -> Hello World
-Decryption result in PHP: Hello World
-
-$ node examples/aes256ctr.js;
-AES256CTR encryption/decryption result: Hello World -> O+CPx7gnn1paN1I= -> Hello World
-Decryption result in PHP: Hello World
-```
-
-## Usage
-
-### AES-256-CTR
-
-```js
-import {AES256CTR} from 'cryptographic-js';
-const cipher = new AES256CTR();
-
-const plainText = 'Hello World';
-const key = cipher.createKey('hex');
-const iv = cipher.createIV('hex');
-const encrypted = cipher.encrypt(plainText, key, iv);
-const decrypted = cipher.decrypt(encrypted, key, iv);
-console.log(decrypted);// Hello World
-```
-
-### AES-256-CBC
+## Quick Start
 
 ```js
 import {AES256CBC} from 'cryptographic-js';
 
 const cipher = new AES256CBC();
-const plainText = 'Hello World';
+
+// Generate key and IV
 const key = cipher.createKey('hex');
-const iv = cipher.createIV('hex');
-const encrypted = cipher.encrypt(plainText, key, iv);
+const iv  = cipher.createIV('hex');
+
+// Encrypt
+const encrypted = cipher.encrypt('Hello World', key, iv);
+// => "<encrypted>"
+
+// Decrypt
 const decrypted = cipher.decrypt(encrypted, key, iv);
-console.log(decrypted);// Hello World
+// => "Hello World"
 ```
 
-### AES-256-CBC
+All 9 classes share the same interface. Just swap the import:
 
 ```js
-import {AES256CFB} from 'cryptographic-js';
-
-const cipher = new AES256CFB();
-const plainText = 'Hello World';
-const key = cipher.createKey('hex');
-const iv = cipher.createIV('hex');
-const encrypted = cipher.encrypt(plainText, key, iv);
-const decrypted = cipher.decrypt(encrypted, key, iv);
-console.log(decrypted);// Hello World
+import {AES256CTR} from 'cryptographic-js';  // AES-256-CTR
+import {AES192CFB} from 'cryptographic-js';  // AES-192-CFB
+import {AES128CBC} from 'cryptographic-js';  // AES-128-CBC
+// ... and so on
 ```
+
+## API
+
+Every class provides four methods:
+
+### `encrypt(plaintext, key, iv, outputEncoding?)`
+
+Encrypts a plaintext string.
+
+| Parameter | Type | Description |
+|:----------|:-----|:------------|
+| `plaintext` | `string` | Text to encrypt |
+| `key` | `string \| Buffer` | Encryption key |
+| `iv` | `string \| Buffer` | Initialization vector |
+| `outputEncoding` | `'base64' \| 'hex' \| 'binary'` | Output format (default: `'base64'`) |
+
+**Returns** `string` — The encrypted data.
+
+### `decrypt(encrypted, key, iv, inputEncoding?)`
+
+Decrypts an encrypted string.
+
+| Parameter | Type | Description |
+|:----------|:-----|:------------|
+| `encrypted` | `string` | Encrypted text |
+| `key` | `string \| Buffer` | Encryption key |
+| `iv` | `string \| Buffer` | Initialization vector |
+| `inputEncoding` | `'base64' \| 'hex' \| 'binary'` | Input format (default: `'base64'`) |
+
+**Returns** `string` — The decrypted plaintext.
+
+### `createKey(type?)`
+
+Generates a random encryption key with the correct length for the algorithm.
+
+| Parameter | Type | Description |
+|:----------|:-----|:------------|
+| `type` | `'buffer' \| 'hex'` | Return type (default: `'buffer'`) |
+
+**Returns** `Buffer | string`
+
+### `createIV(type?)`
+
+Generates a random initialization vector (16 bytes).
+
+| Parameter | Type | Description |
+|:----------|:-----|:------------|
+| `type` | `'buffer' \| 'hex'` | Return type (default: `'buffer'`) |
+
+**Returns** `Buffer | string`
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-[MIT licensed](./LICENSE.txt)
+[MIT](LICENSE)

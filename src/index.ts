@@ -1,4 +1,7 @@
-import {version} from '~/package';
+/**
+ * cryptographic-js — Lightweight AES encryption and decryption for Node.js.
+ * @module cryptographic-js
+ */
 import AES256CTR from '~/AES256CTR';
 import AES192CTR from '~/AES192CTR';
 import AES128CTR from '~/AES128CTR';
@@ -10,7 +13,6 @@ import AES192CFB from '~/AES192CFB';
 import AES128CFB from '~/AES128CFB';
 
 export {
-  version,
   AES256CTR,
   AES192CTR,
   AES128CTR,

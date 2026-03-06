@@ -2,32 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2026-03-06
+
+### Improved
+
+- Unified API documentation directly in README
+- Added JSDoc to all public classes and methods for better IDE support
+- Removed `version` export (use `package.json` version instead)
+
 ## [1.0.2] - 2021-09-18
 
-- Fixed IV length check error message. Refactor the example code.
+### Fixed
+
+- Corrected IV length validation error message
+- Cleaned up example code
 
 ## [1.0.1] - 2020-12-02
 
-- Added format parameters for encrypted data to the encryption and decryption functions.
-    
-    ```js
-    // Encrypt.
-    const cipher = new AES256CTR();
-    const plainText = 'Hello, World!';
-    const key = cipher.createKey('hex');
-    const iv = cipher.createIV('hex');
+### Added
 
-    // Get encrypted data in base64 format.
-    const encoding = 'base64';
-    const encrypted = cipher.encrypt(plainText, key, iv, encoding);
+- Output encoding option (`'base64'` | `'hex'` | `'binary'`) for `encrypt()` and `decrypt()`
 
-    // Decrypt.
-    const decrypted = cipher.decrypt(encrypted, key, iv, encoding);
-    ````
+```js
+const cipher = new AES256CTR();
+const key = cipher.createKey('hex');
+const iv  = cipher.createIV('hex');
+
+const encrypted = cipher.encrypt('Hello, World!', key, iv, 'hex');
+const decrypted = cipher.decrypt(encrypted, key, iv, 'hex');
+```
 
 ## [1.0.0] - 2020-12-01
 
-- First release.
+### Released
 
-[1.0.1]: https://github.com/takuya-motoshima/cryptographic-js/compare/v1.0.0...v1.0.1
-[1.0.2]: https://github.com/takuya-motoshima/cryptographic-js/compare/v1.0.1...v1.0.2
+- Initial release with support for AES-128/192/256 in CTR, CBC, and CFB modes
+
+[1.0.0]: https://github.com/shumatsumonobu/cryptographic-js/releases/tag/v1.0.0
+[1.0.1]: https://github.com/shumatsumonobu/cryptographic-js/compare/v1.0.0...v1.0.1
+[1.0.2]: https://github.com/shumatsumonobu/cryptographic-js/compare/v1.0.1...v1.0.2
+[1.0.3]: https://github.com/shumatsumonobu/cryptographic-js/compare/v1.0.2...v1.0.3
