@@ -1,4 +1,4 @@
-import Cipher from '~/Cipher';
+import Cipher from './Cipher';
 
 /**
  * AES-128-CBC cipher.

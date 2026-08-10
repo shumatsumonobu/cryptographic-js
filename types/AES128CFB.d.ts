@@ -1,4 +1,4 @@
-import Cipher from '~/Cipher';
+import Cipher from './Cipher';
 /**
  * AES-128-CFB cipher.
  * 128-bit key, 16-byte IV, Cipher Feedback mode.

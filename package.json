@@ -1,6 +1,6 @@
 {
   "name": "cryptographic-js",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Lightweight AES encryption and decryption for Node.js",
   "_moduleAliases": {
     "~": "."
@@ -15,6 +15,21 @@
     "prebuild": "rm -rf dist types",
     "test": "jest",
     "start": "ts-node -r tsconfig-paths/register -P tsconfig.json -O '{\"module\":\"commonjs\"}' -e \"import * as index from '~/index';console.log(index);\""
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/__tests__/**/*.test.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsconfig": {
+          "rootDir": ".",
+          "module": "commonjs"
+        }
+      }
+    }
   },
   "repository": {
     "type": "git",
@@ -51,16 +66,17 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/jest": "^26.0.3",
     "@types/node": "^14.14.10",
     "builtin-modules": "^3.1.0",
     "jest": "^26.1.0",
-    "rollup": "^2.21.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^6.1.0",
-    "rollup-plugin-typescript2": "^0.27.1",
+    "rollup": "^4.62.4",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "ts-jest": "^26.5.6",
     "ts-loader": "^7.0.5",
     "ts-node": "^8.10.2",
     "tsconfig-paths": "^3.9.0",

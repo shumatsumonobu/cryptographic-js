@@ -1,4 +1,4 @@
-import Cipher from '~/Cipher';
+import Cipher from './Cipher';
 /**
  * AES-256-CTR cipher.
  * 256-bit key, 16-byte IV, Counter mode.

@@ -1,4 +1,4 @@
-import Cipher from '~/Cipher';
+import Cipher from './Cipher';
 /**
  * AES-256-CBC cipher.
  * 256-bit key, 16-byte IV, Cipher Block Chaining mode.
